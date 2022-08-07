@@ -22,6 +22,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "age-error",
     component: () => import("../views/OverAgeUsersView.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("../views/PageNotFoundView.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)",
+    name: "bad-not-found",
+    component: () => import("../views/PageNotFoundView.vue"),
+  },
 ];
 
 const router = createRouter({

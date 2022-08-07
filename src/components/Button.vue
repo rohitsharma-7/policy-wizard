@@ -34,9 +34,10 @@ export default defineComponent({
     btnClass() {
       const classes = clsx(
         this.type !== "filled"
-          ? "bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded mr-2"
-          : "bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded",
+          ? "bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-3 px-4 border border-gray-800 hover:border-transparent rounded mr-4"
+          : "bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 py-3 rounded",
         this.disabled && "cursor-not-allowed opacity-50",
+        "min-w-[100px]",
         this.className
       );
       return classes;

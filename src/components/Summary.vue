@@ -1,16 +1,20 @@
 <template>
-  <div class="max-w-xl text-center">
-    <h2>Summary</h2>
-    <div class="my-4">
-      <p class="mb-2">{{ "Name: " + name }}</p>
-      <p class="mb-2">{{ "Age: " + age }}</p>
-      <p class="mb-2">{{ "Where do you live: " + region }}</p>
-      <p class="mb-2">{{ "Package: " + plan }}</p>
-      <p class="mb-2">{{ "Premium: " + amount + currencyCode }}</p>
-    </div>
-    <div>
-      <Button @click="handleGoBack" text="Back" :type="'outlined'" />
-      <Button @click="handleBuy" text="Buy" />
+  <div class="flex items-center justify-center w-full h-screen">
+    <div class="w-full max-w-xl p-4 text-center bg-primary rounded-xl">
+      <h2 class="text-3xl font-bold">{{ "Summary" }}</h2>
+      <div class="my-4">
+        <p class="mb-3 font-bold">{{ "Name: " + name }}</p>
+        <p class="mb-3 font-semibold">{{ "Age: " + age }}</p>
+        <p class="mb-3 font-semibold">{{ "Where do you live: " + region }}</p>
+        <p class="mb-3 font-semibold">{{ "Package: " + plan }}</p>
+        <p class="mb-3 font-semibold">
+          {{ "Premium: " + amount + currencyCode }}
+        </p>
+      </div>
+      <div>
+        <Button @click="handleGoBack" text="Back" :type="'outlined'" />
+        <Button @click="handleBuy" text="Buy" />
+      </div>
     </div>
   </div>
 </template>

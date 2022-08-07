@@ -1,12 +1,10 @@
 <template>
   <div class="flex items-center justify-center w-full h-screen">
-    <div class="max-w-xl text-center">
-      <h2>{{ "Oopps" }}</h2>
-      <div class="my-4">
-        <p>{{ "Your age is over our accepted limit." }}.</p>
-        <p>{{ "We are sorry but we cannot insure you now" }}</p>
-      </div>
-      <Button text="Ok :(" @click="handleRedirection" />
+    <div>
+      <h1 class="mb-4 text-2xl font-semibold">
+        {{ "The page you're looking for does not exists" }}
+      </h1>
+      <Button @click="handleRedirection" text="Home" />
     </div>
   </div>
 </template>
@@ -16,10 +14,8 @@ import { defineComponent } from "vue";
 import Button from "@/components/Button.vue";
 
 export default defineComponent({
-  name: "Error-Component",
-  components: {
-    Button,
-  },
+  name: "PageNotFoundView",
+  components: { Button },
   methods: {
     handleRedirection() {
       this.$router.push({

@@ -1,55 +1,62 @@
 <template>
-  <div class="max-w-xl text-center">
-    <h2 class="mb-2">{{ "Tell us about yourself" }}</h2>
-    <div class="px-8 pt-6 pb-8 mb-4">
-      <InputField
-        label="Name"
-        name="name"
-        placeholder="Name"
-        :value="name"
-        @input="handleChange"
-      />
-      <InputField
-        label="Age"
-        min="0"
-        name="age"
-        placeholder="Age"
-        type="number"
-        :value="age"
-        @input="handleChange"
-      />
-      <Select
-        label="Where do you live"
-        name="region"
-        :options="regions"
-        @change="handleChange"
-      />
-      <div class="mb-4 text-left">
-        <div
-          v-for="(option, index) in plans"
-          v-bind:key="index"
-          class="my-2 cursor-pointer"
-        >
-          <label class="flex items-center">
-            <input
-              type="radio"
-              name="plan"
-              :value="option"
-              :checked="plan === option"
-              @change="handleChange"
-            />
-            <span class="inline-block ml-2 text-gray-800 form-check-label">{{
-              option + getExtraPremiumAmount(option)
-            }}</span>
-          </label>
+  <div class="flex items-center justify-center w-full h-screen">
+    <div class="w-full max-w-xl p-4 text-center bg-primary rounded-xl">
+      <h2 class="mb-2 text-3xl font-bold">{{ "Tell us about yourself" }}</h2>
+      <div class="px-8 pt-6 pb-8">
+        <InputField
+          label="Name"
+          name="name"
+          placeholder="Name"
+          :value="name"
+          @input="handleChange"
+        />
+        <InputField
+          label="Age"
+          min="0"
+          name="age"
+          placeholder="Age"
+          type="number"
+          :value="age"
+          @input="handleChange"
+        />
+        <Select
+          label="Where do you live"
+          name="region"
+          :options="regions"
+          @change="handleChange"
+        />
+        <div class="mb-4 text-left">
+          <div
+            v-for="(option, index) in plans"
+            v-bind:key="index"
+            class="my-2 cursor-pointer"
+          >
+            <label class="flex items-center">
+              <input
+                type="radio"
+                name="plan"
+                :value="option"
+                :checked="plan === option"
+                @change="handleChange"
+              />
+              <span
+                class="inline-block ml-2 overflow-hidden font-semibold text-gray-800 form-check-label whitespace-nowrap text-ellipsis"
+                >{{ option + getExtraPremiumAmount(option) }}</span
+              >
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="my-4">
-        <h2>{{ "Your premium is" + ": " + amount + currencyCode }}</h2>
-      </div>
-      <div>
-        <Button @click="handleGoBack" text="Back" :type="'outlined'" />
-        <Button @click="handleGoNext" :disabled="disabled" text="Next" />
+        <div
+          class="my-4 overflow-hidden text-2xl font-bold text-ellipsis whitespace-nowrap"
+        >
+          <h2 class="overflow-hidden whitespace-nowrap text-ellipsis">
+            {{ "Your premium is" + ": " + amount + currencyCode }}
+          </h2>
+        </div>
+        <div>
+          <Button @click="handleGoBack" text="Back" :type="'outlined'" />
+          <Button @click="handleGoNext" :disabled="disabled" text="Next" />
+        </div>
       </div>
     </div>
   </div>

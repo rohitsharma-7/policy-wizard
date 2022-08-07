@@ -1,5 +1,5 @@
 import { CURRENCY_CODE, PLAN, REGION } from "@/shared/constants";
-import { User } from "@/shared/interfaces";
+import { User } from "@/shared/types";
 import { createStore, GetterTree, MutationTree } from "vuex";
 
 const state = (): User => {
