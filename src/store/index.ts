@@ -2,7 +2,7 @@ import { CURRENCY_CODE, PLAN, REGION } from "@/shared/constants";
 import { User } from "@/shared/types";
 import { createStore, GetterTree, MutationTree } from "vuex";
 
-const state = (): User => {
+export const initialState = (): User => {
   return {
     age: 0,
     name: "",
@@ -11,7 +11,7 @@ const state = (): User => {
   };
 };
 
-const getters: GetterTree<User, User> = {
+export const getters: GetterTree<User, User> = {
   getAge(state) {
     return state.age;
   },
@@ -61,7 +61,7 @@ const getters: GetterTree<User, User> = {
   },
 };
 
-const mutations: MutationTree<User> = {
+export const mutations: MutationTree<User> = {
   resetState(state) {
     state.age = 0;
     state.name = "";
@@ -83,7 +83,7 @@ const mutations: MutationTree<User> = {
 };
 
 export default createStore({
-  state: state(),
+  state: initialState(),
   getters,
   mutations,
   actions: {},

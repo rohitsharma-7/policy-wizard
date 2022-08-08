@@ -84,5 +84,14 @@ export default defineComponent({
       return value;
     },
   },
+  mounted() {
+    const age = this.store.getters["getAge"];
+    // redirect to previous screen in case if age is "0"
+    if (age === 0) {
+      this.$router.replace({
+        path: "/policy",
+      });
+    }
+  },
 });
 </script>
