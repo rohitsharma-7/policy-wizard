@@ -117,7 +117,7 @@ export default defineComponent({
       const value = (e.target as HTMLInputElement).value;
       switch (fieldName) {
         case "age":
-          this.store.commit("setAge", value);
+          this.store.commit("setAge", Number(value || 0));
           break;
         case "name":
           this.store.commit("setName", value);
