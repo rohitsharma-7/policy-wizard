@@ -1,12 +1,13 @@
 <template>
   <div class="mb-4 text-left">
-    <label class="block text-gray-700 text-sm font-bold mb-2" :for="name">
+    <label class="block mb-2 text-sm font-bold text-gray-700" :for="name">
       {{ label }}
     </label>
     <select
-      class="form-select form-select-lg w-full py-2 px-3 text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+      class="w-full px-3 py-2 m-0 text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       @change="handleChange"
       :name="name"
+      :value="value"
     >
       <option
         v-for="(option, index) in options"
@@ -37,6 +38,10 @@ export default defineComponent({
     options: {
       required: true,
       type: Array as () => string[],
+    },
+    value: {
+      required: true,
+      type: String,
     },
   },
   setup(_, { emit }) {

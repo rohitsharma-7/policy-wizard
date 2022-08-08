@@ -18,11 +18,13 @@
           type="number"
           :value="age"
           @input="handleChange"
+          :errorMessage="error"
         />
         <Select
           label="Where do you live"
           name="region"
           :options="regions"
+          :value="region"
           @change="handleChange"
         />
         <div class="mb-4 text-left">
@@ -69,9 +71,15 @@ import InputField from "@/components/InputField.vue";
 import Select from "@/components/Select.vue";
 import Button from "@/components/Button.vue";
 import { PLAN, PLANS, REGIONS } from "@/shared/constants";
+import { isFloatingPointValue } from "@/shared/helpers";
 
 export default defineComponent({
   name: "Policy-Form",
+  data() {
+    return {
+      error: "",
+    };
+  },
   methods: {
     handleRedirection(page: string) {
       if (this.$router) {
@@ -84,14 +92,23 @@ export default defineComponent({
     },
     getExtraPremiumAmount(plan: string) {
       const value: number = this.age * 10 * this.rate;
+      const error: string = this.error;
       if (!value) {
         return "";
       }
       switch (plan) {
         case PLAN.SAFE:
-          return " (+" + value * 0.5 + `${this.currencyCode}, 50%)`;
+          return (
+            " (+" +
+            (error ? (value * 0.5).toFixed(2) : value * 0.5) +
+            `${this.currencyCode}, 50%)`
+          );
         case PLAN.SUPER_SAFE:
-          return " (+" + value * 0.75 + `${this.currencyCode}, 75%)`;
+          return (
+            " (+" +
+            (error ? (value * 0.75).toFixed(2) : value * 0.75) +
+            `${this.currencyCode}, 75%)`
+          );
         default:
           return "";
       }
@@ -115,6 +132,13 @@ export default defineComponent({
     handleChange(e: Event) {
       const fieldName = (e.target as HTMLInputElement).name;
       const value = (e.target as HTMLInputElement).value;
+      if (fieldName === "age") {
+        if (value && isFloatingPointValue(value)) {
+          this.error = "Age must be a whole number";
+        } else {
+          this.error = "";
+        }
+      }
       switch (fieldName) {
         case "age":
           this.store.commit("setAge", Number(value || 0));
@@ -161,12 +185,15 @@ export default defineComponent({
     },
     amount() {
       const value: number = this.store.getters["getAmount"];
-      return value;
+      const error: string = this.error;
+      return error ? value.toFixed(2) : value;
     },
     disabled() {
       const name: string = this.name;
       const age: number = this.age;
-      const isDisabled: boolean = name.trim() === "" || age === 0;
+      const error: string = this.error;
+      const isDisabled: boolean =
+        name.trim() === "" || age === 0 || Boolean(error);
       return isDisabled;
     },
     extraPremium() {

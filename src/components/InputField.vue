@@ -1,10 +1,10 @@
 <template>
   <div class="mb-4 text-left">
-    <label class="block text-gray-700 text-sm font-bold mb-2" :for="name">
+    <label class="block mb-2 text-sm font-bold text-gray-700" :for="name">
       {{ label }}
     </label>
     <input
-      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       :min="min"
       :name="name"
       :type="type"
@@ -12,6 +12,9 @@
       :value="value"
       @input="handleChange"
     />
+    <span class="text-sm text-error" v-if="errorMessage">{{
+      errorMessage
+    }}</span>
   </div>
 </template>
 
@@ -42,6 +45,10 @@ export default defineComponent({
       default: "text",
     },
     value: [Number, String],
+    errorMessage: {
+      type: String,
+      default: "",
+    },
   },
   setup(_, { emit }) {
     const handleChange = (e: Event) => emit("input", e);
